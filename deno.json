@@ -1,6 +1,8 @@
 {
   "lock": false,
   "tasks": {
-    "dev": "deno run --watch=posts -A main.ts"
+    "install": "PUPPETEER_PRODUCT=chrome deno run -A --unstable https://deno.land/x/puppeteer@16.2.0/install.ts",
+    "dev": "deno run --watch=posts -A main.ts",
+    "cli": "deno run -A cli.ts"
   }
 }
