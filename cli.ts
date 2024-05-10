@@ -7,8 +7,6 @@ await new Command().name("blog-cli").command(
 ).action(async () => {
   const browser = await puppeteer.launch({ headless: false });
   const page = await browser.newPage();
-  page.on("load", async () => {
-  });
   await page.goto("https://leetcode.com/problemset/", {
     waitUntil: "networkidle2",
   });
@@ -36,4 +34,6 @@ await new Command().name("blog-cli").command(
       icon = "🔴";
       break;
   }
+  let lcnum = title.match(/d+/);
+  console.log(lcnum);
 }).parse(Deno.args);
