@@ -4,4 +4,5 @@ blog({
   author: "Manybugs",
   title: "Manybugs Blog",
   description: "Too many bugs, what should I do?",
+  favicon: "favicon.drawio.svg",
 });
