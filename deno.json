@@ -1,7 +1,6 @@
 {
   "lock": false,
   "tasks": {
-    "dev": "deno run --watch=posts -A main.ts",
-    "cli": "python3 cli.py"
+    "dev": "deno run --watch=posts -A main.ts"
   }
 }
