@@ -3,8 +3,5 @@
   "tasks": {
     "dev": "deno run --watch=posts -A main.ts",
     "new": "deno run -A cli.ts new"
-  },
-  "imports": {
-    "@std/path": "jsr:@std/path@^0.225.1"
   }
 }
