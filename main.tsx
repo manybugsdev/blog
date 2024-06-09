@@ -5,6 +5,7 @@ blog({
   author: "Manybugs",
   title: "Manybugs Blog",
   description: "Too many bugs, what should I do?",
+  theme: "light",
   links: [
     { title: "GitHub", url: "https://github.com/manybugsdev" },
     {
