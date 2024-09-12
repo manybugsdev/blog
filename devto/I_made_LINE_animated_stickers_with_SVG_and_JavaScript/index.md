@@ -1,4 +1,4 @@
-# How to make APNG animations with SVG and JavaScript.
+# How to make APNG animations with SVG and JavaScript
 
 ## Motivation
 
@@ -12,17 +12,17 @@ https://www.statista.com/statistics/1263360/most-popular-messenger-apps-worldwid
 
 However, There is a country where almost all people use LINE. It is Japan, my native country.
 
-Why is LINE so popular in Japan? LINE は東日本大震災の後、電話が繋がらなくなった場合の代替を目的として開発されたそうです。私も記憶していますが、その頃日本は旧式の携帯電話から現在のスマートフォンへと移行が進んでおり、その波に上手く乗った印象があります。
+Why is LINE so popular in Japan? After [the Great East Japan Earthquake](https://www.pref.miyagi.jp/site/kt-kiroku/kt-kiroku-eng.html), LINE was created as a substitute for telephones. I remember that smartphones were becoming popular in Japan at that time and LINE followed the trend well.
 
 ![old type cell phone](alexander-andrews-SqUrvIt4B68-unsplash.jpg)
 
-日本人は個人情報をインターネット上に公開することに抵抗があり、閉じた関係性の人のみとチャットで連絡が取れる LINE はすぐに受け入れられて、現在も多くの日本人に使われています。
+We japanese people tend to feel uncomfortable disclosing personal information on the Internet, so LINE has become our favorite messenger app because it targets closed relationships.
 
-## What is LINE stickers?
-
-私は LINE の最大の魅力はスタンプ(Sticker)機能だと思っています。とても可愛らしくて個性のあるスタンプがたくさんあり、スタンプを送り合うコミュニケーションはとても楽しいです。いいスタンプを見つけたらショップから購入することで使用することができるようになります。
+Also, I think LINE is a really great messaging app because we use so many stickers on it.
 
 https://store.line.me/stickershop/showcase/top/en
+
+Many stickers being sold are so cute and unique. it is fun to send a curious sticker to my friends.
 
 実はこのスタンプは企業が作っているものだけではなく、個人で作っているものも数多くあります。個人で作った場合も同じように公式ショップで販売することが可能で販売数に応じた収益を得られるようになります。
 
