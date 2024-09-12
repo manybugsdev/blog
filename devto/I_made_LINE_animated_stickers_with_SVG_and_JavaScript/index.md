@@ -1,20 +1,18 @@
-# I made LINE animated stickers with SVG and JavaScript.
+# How to make APNG animations with SVG and JavaScript.
 
-概要:まず SVG を dataURI に変換し canvas に drawImage で描写します。getImageData でピクセルデータを得た後、UPNG.js を使って アニメーション png ファイルを作ります。もう二度とやりたくありません。
+## Motivation
 
-## What is LINE?
-
-あなたは LINE というアプリを知っていますか？
+Do you know LINE?
 
 https://line.me/en/
 
-LINE について聞いたことがない人もいるかも知れません。NAVER にルーツを持ち、今は LY によって運営されているメッセンジャーアプリです。Telegram や WhatsApp などと比べてダウンロード数も少ないマイナーなようです。そもそも Facebook のような SNS のみ使用して、このようなアプリは不必要だと考えている人も多いのではないでしょうか。
+Some people may never have heard of LINE. LINE is a messaging app created by NAVER and now operated by LY Corp. It seems to be less known than Telegram or WhatsApp. In the first place, you might not need to use messaging apps if you have used SNS as a messaging app.
 
 https://www.statista.com/statistics/1263360/most-popular-messenger-apps-worldwide-by-monthly-downloads/
 
-しかし、ほぼ全ての国民が LINE を使っている国があります。それは、私の母国である日本です。
+However, There is a country where almost all people use LINE. It is Japan, my native country.
 
-なぜこんなにも人気があるのでしょうか？LINE は東日本大震災の後、電話が繋がらなくなった場合の代替を目的として開発されたそうです。私も記憶していますが、その頃日本は旧式の携帯電話から現在のスマートフォンへと移行が進んでおり、その波に上手く乗った印象があります。
+Why is LINE so popular in Japan? LINE は東日本大震災の後、電話が繋がらなくなった場合の代替を目的として開発されたそうです。私も記憶していますが、その頃日本は旧式の携帯電話から現在のスマートフォンへと移行が進んでおり、その波に上手く乗った印象があります。
 
 ![old type cell phone](alexander-andrews-SqUrvIt4B68-unsplash.jpg)
 
