@@ -22,17 +22,16 @@ Also, I think LINE is a really great messaging app because we use so many sticke
 
 https://store.line.me/stickershop/showcase/top/en
 
-Many stickers being sold are so cute and unique. it is fun to send a curious sticker to my friends.
+Many stickers being sold are so cute and unique. it is fun to send a curious sticker to my friends. The stickers are not only made by companies, but also made by civilians. They could get money if their stickers are bought by LINE users.
 
-実はこのスタンプは企業が作っているものだけではなく、個人で作っているものも数多くあります。個人で作った場合も同じように公式ショップで販売することが可能で販売数に応じた収益を得られるようになります。
-
-私は 7 年ほど前に LINE スタンプを作成し、販売しました。
+Actually, I have created and sold a bellow sticker about 7 years ago.
 
 https://store.line.me/stickershop/product/1444071/en
 
 ![bassist sticker](bass.png)
 
-私はベースを少しばかり演奏できるのですが、ベーシストが使えるスタンプが欲しくなり作成しました。ベーシストはアゴでリズムをとる人が非常に多いのです。
+I could play the bass a little. I would like a sticker for the bassist keeping the rhythm with his chin.
+Are there many bassists shaking their chins?
 
 私は iPad のような高級品を持っていなかったので、[FireAlpaca](https://firealpaca.com/en)というドローソフトと 1 個のマウスで 40 枚の絵を描きました。拙い絵ですが、かなり大変だったことを覚えています。
 
