@@ -22,4 +22,17 @@ LINE provide creation guidelines to us so we can create stickers of varius types
 
 I have made SVG animation website previously so I found the way to create APNG converted SVG.
 
-## UPNG.js
+## Plan
+
+SVG is a XML for vector graphics.
+
+```svg
+<svg xmlns="http://www.w3.org/2000/svg"  viewBox="0,0,16,16" width="160" height="160">
+    <rect x="0" y="0" width="16" height="16" fill="lightblue"></rect>
+    <circle cx="10" cy="10" r="4" fill="green" ></circle>
+</svg>
+```
+
+![](./svg_sample.png)
+
+Writing SVG is bothersome so
