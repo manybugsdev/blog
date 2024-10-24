@@ -1,7 +1,0 @@
-{
-  "lock": false,
-  "tasks": {
-    "dev": "deno run --watch=posts -A main.tsx",
-    "new": "deno run -A cli.ts new"
-  }
-}
