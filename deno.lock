@@ -9,7 +9,8 @@
     "jsr:@std/net@^1.0.4": "1.0.4",
     "jsr:@std/path@*": "1.0.7",
     "jsr:@std/path@^1.0.7": "1.0.7",
-    "jsr:@std/streams@^1.0.7": "1.0.7"
+    "jsr:@std/streams@^1.0.7": "1.0.7",
+    "npm:mini-van-plate@*": "0.6.0"
   },
   "jsr": {
     "@std/cli@1.0.6": {
@@ -47,6 +48,11 @@
     },
     "@std/streams@1.0.7": {
       "integrity": "1a93917ca0c58c01b2bfb93647189229b1702677f169b6fb61ad6241cd2e499b"
+    }
+  },
+  "npm": {
+    "mini-van-plate@0.6.0": {
+      "integrity": "sha512-A3AXRIonZNbLUc8EDVvUs06wQBf8Tv2w+IiefkLODxxdOjg4UH4TiYENtViV3NtIsyhVKn3vpEh1DfrKmoGCXQ=="
     }
   }
 }

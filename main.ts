@@ -1,4 +1,7 @@
 import { serveDir } from "jsr:@std/http/file-server";
+import van, { type Element } from "npm:mini-van-plate/van-plate";
+
+const t = van.tags;
 
 type Handler = (req: Request) => Response | Promise<Response>;
 
@@ -12,43 +15,43 @@ type Post = {
     html: string;
     headers: Record<string, string>;
 };
-
-const $ = (
-    tag: string,
-    attrs?: Record<string, string>,
-    ...children: string[]
-) => `<${tag} ${
-    attrs
-        ? Object.keys(attrs).map((key) => `${key}="${attrs[key]}"`).join(" ")
-        : ""
-}${children.length ? `>${children.join("")}</${tag}>` : "/>"}`;
-
-const $layout = ({ title, body }: { title: string; body: string }) =>
-    $(
-        "html",
-        { lang: "ja" },
-        $(
-            "head",
-            {},
-            $("meta", { charset: "utf8" }),
-            $("meta", {
-                name: "viewport",
-                content: "width=device-width, initial-scale=1.0",
-            }),
-            $("title", {}, title),
-            $("link", { rel: "stylesheet", href: "style.css" }),
+const template = {
+    _default: ({ title, body }: { title: string; body: Element }) =>
+        van.html(
+            { lang: "en" },
+            t.head(
+                t.meta({ charset: "utf8" }),
+                t.meta({
+                    name: "viewport",
+                    content: "width=device-width, initial-scale=1.0",
+                }),
+                t.title(title),
+                t.link({ rel: "stylesheet", href: "style.css" }),
+            ),
+            t.body(body),
         ),
-        $("body", {}, body),
-    );
+    home: () =>
+        template._default({
+            title: "Home | manybugs.dev",
+            body: t.h1("Home"),
+        }),
+};
 
-const notFound = () => new Response("404 not found.", { status: 404 });
+const response = {
+    notFound: () => new Response("404 not found.", { status: 404 }),
+    html: (body: string) =>
+        new Response(body, {
+            status: 200,
+            headers: { "content-type": "text/html;charset=utf8" },
+        }),
+};
 
 const pipe = (...handlers: Handler[]) => async (req: Request) => {
     for (const handler of handlers) {
         const res = await handler(req);
         if (res.status !== 404) return res;
     }
-    return notFound();
+    return response.notFound();
 };
 
 const router =
@@ -61,14 +64,8 @@ const router =
                 return await handler(match.pathname.groups, req);
             }
         }
-        return notFound();
+        return response.notFound();
     };
-
-const html = (body: string) =>
-    new Response(body, {
-        status: 200,
-        headers: { "content-type": "text/html;charset=utf8" },
-    });
 
 const collectPosts = async (path: string) => {
     let posts: Record<string, Post> = {};
@@ -93,11 +90,8 @@ if (import.meta.main) {
         pipe(
             router({
                 "/": () =>
-                    html(
-                        $layout({
-                            title: "Home | manybugs.dev",
-                            body: "<h1>hi</h1>",
-                        }),
+                    response.html(
+                        template.home(),
                     ),
             }),
             (req) => serveDir(req, { fsRoot: "./static" }),
