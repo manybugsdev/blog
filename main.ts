@@ -11,6 +11,7 @@ type RouterHandler = (
 ) => Response | Promise<Response>;
 
 type Post = {
+    id: string;
     md: string;
     html: string;
     headers: Record<string, string>;
@@ -29,18 +30,23 @@ const template = {
                 t.link({ rel: "icon", href: "favicon.ico" }),
                 t.link({ rel: "stylesheet", href: "style.css" }),
             ),
-            t.body(body),
+            t.body(body, t.footer(t.p(t.a({ href: "/" }, "Home")))),
         ),
     home: (posts: Post[]) =>
         template._default({
-            title: "Home | manybugs.dev",
+            title: "Home | Manybugs Blog",
             body: t.div(
                 t.header(
                     { class: "mv" },
-                    t.h1("manybugs.dev"),
+                    t.img({
+                        src: "logo.svg",
+                        alt: "logo",
+                        width: "72px",
+                    }),
+                    t.h1("Manybugs Blog"),
                     t.p("Too many bugs, what should I do?"),
                 ),
-                t.main(),
+                t.main(posts.map((post) => t.article(t.h2("title")))),
             ),
         }),
 };
@@ -76,17 +82,22 @@ const router =
     };
 
 const collectPosts = async (path: string) => {
-    let posts: Record<string, Post> = {};
+    let posts: Post[] = [];
     for await (const ent of Deno.readDir(path)) {
         if (ent.isDirectory) {
-            posts = {
+            posts = [
                 ...posts,
                 ...(await collectPosts(`${path}/${ent.name}`)),
-            };
+            ];
         }
         if (ent.isFile && ent.name.endsWith(".md")) {
             const basename = ent.name.split(".").slice(0, -1).join(".");
-            posts[`${path}/${basename}/`] = { md: "", html: "", headers: {} };
+            posts.push({
+                id: `${path}/${basename}/`,
+                md: "",
+                html: "",
+                headers: {},
+            });
         }
     }
     return posts;
@@ -99,7 +110,7 @@ if (import.meta.main) {
             router({
                 "/": () =>
                     response.html(
-                        template.home(),
+                        template.home(posts),
                     ),
             }),
             (req) => serveDir(req, { fsRoot: "./static" }),

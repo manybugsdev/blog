@@ -2,6 +2,7 @@
 @import url("https://cdn.jsdelivr.net/npm/modern-normalize@3.0.1/modern-normalize.min.css");
 :root {
   --black: #111;
+  --container-size: 600px;
 }
 body {
   font-family: "Electrolize", sans-serif;
@@ -19,7 +20,30 @@ header.mv {
 header.mv::after {
   position: absolute;
   content: "";
-  width: min(800px, 100%);
-  border-bottom: var(--black) 1px dotted;
+  width: min(var(--container-size), 100%);
+  border-bottom: var(--black) 2px dotted;
   bottom: 0;
+}
+img {
+  max-width: 100%;
+}
+footer {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+footer::after {
+  position: absolute;
+  content: "";
+  width: min(var(--container-size), 100%);
+  border-bottom: var(--black) 2px dotted;
+  top: 0;
+}
+a {
+  color: var(--black);
+}
+main {
+  margin: auto;
+  width: min(var(--container-size), 100%);
+  padding: 0 0.2rem;
 }
