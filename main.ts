@@ -26,14 +26,22 @@ const template = {
                     content: "width=device-width, initial-scale=1.0",
                 }),
                 t.title(title),
+                t.link({ rel: "icon", href: "favicon.ico" }),
                 t.link({ rel: "stylesheet", href: "style.css" }),
             ),
             t.body(body),
         ),
-    home: () =>
+    home: (posts: Post[]) =>
         template._default({
             title: "Home | manybugs.dev",
-            body: t.h1("Home"),
+            body: t.div(
+                t.header(
+                    { class: "mv" },
+                    t.h1("manybugs.dev"),
+                    t.p("Too many bugs, what should I do?"),
+                ),
+                t.main(),
+            ),
         }),
 };
 

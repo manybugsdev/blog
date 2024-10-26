@@ -1,4 +1,25 @@
+@import url("https://fonts.googleapis.com/css2?family=Electrolize&display=swap");
+@import url("https://cdn.jsdelivr.net/npm/modern-normalize@3.0.1/modern-normalize.min.css");
+:root {
+  --black: #111;
+}
 body {
-    color: #333;
-    background: #fefefe;
+  font-family: "Electrolize", sans-serif;
+  background-color: white;
+  color: var(--black);
+}
+header.mv {
+  position: relative;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 24rem;
+}
+header.mv::after {
+  position: absolute;
+  content: "";
+  width: min(800px, 100%);
+  border-bottom: var(--black) 1px dotted;
+  bottom: 0;
 }
