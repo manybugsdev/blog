@@ -27,8 +27,8 @@ const template = {
                     content: "width=device-width, initial-scale=1.0",
                 }),
                 t.title(title),
-                t.link({ rel: "icon", href: "favicon.ico" }),
-                t.link({ rel: "stylesheet", href: "style.css" }),
+                t.link({ rel: "icon", href: "/favicon.ico" }),
+                t.link({ rel: "stylesheet", href: "/style.css" }),
             ),
             t.body(body, t.footer(t.p(t.a({ href: "/" }, "Home")))),
         ),
@@ -38,11 +38,15 @@ const template = {
             body: t.div(
                 t.header(
                     { class: "mv" },
-                    t.img({
-                        src: "logo.svg",
-                        alt: "logo",
-                        width: "72px",
-                    }),
+                    t.div(
+                        { style: "width: 72px; height: 72px" },
+                        t.img({
+                            src: "logo.svg",
+                            alt: "logo",
+                            width: "72px",
+                            height: "72px",
+                        }),
+                    ),
                     t.h1("Manybugs Blog"),
                     t.p("Too many bugs, what should I do?"),
                 ),
