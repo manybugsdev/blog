@@ -10,6 +10,23 @@ import { unified } from "npm:unified";
 
 const t = van.tags;
 
+const elementProto = Object.getPrototypeOf(t.a()); // hack
+
+function raw(html: string): Element { // hack
+    const el = {
+        __proto__: elementProto,
+        renderToBuf(buf: string[]) {
+            buf.push(html);
+        },
+        render() {
+            const buf: string[] = [];
+            this.renderToBuf(buf);
+            return buf.join("");
+        },
+    };
+    return el;
+}
+
 type Handler = (req: Request) => Response | Promise<Response>;
 
 type RouterHandler = (
@@ -25,7 +42,7 @@ type Post = {
 };
 
 const template = {
-    _default: ({ title, body }: { title: string; body: string }) => {
+    _default: ({ title, body }: { title: string; body: Element }) => {
         return van.html(
             { lang: "en" },
             t.head(
@@ -35,10 +52,21 @@ const template = {
                     content: "width=device-width, initial-scale=1.0",
                 }),
                 t.title(title),
+                t.link({
+                    rel: "stylesheet",
+                    href:
+                        "https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css",
+                }),
                 t.link({ rel: "icon", href: "/favicon.ico" }),
                 t.link({ rel: "stylesheet", href: "/style.css" }),
             ),
-            t.body(t.footer(t.p(t.a({ href: "/" }, "Home")))),
+            t.body(
+                body,
+                t.footer(t.p(t.a({ href: "/" }, "Home"))),
+                t.script({
+                    src: "https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js",
+                }),
+            ),
         );
     },
     home: (posts: Post[]) =>
@@ -72,13 +100,18 @@ const template = {
                 ),
             ),
         }),
-    post: ({ headers: { title }, html }: Post) => {
-        const dom = t.div();
-        return template._default({
+    post: ({ headers: { title, publish_date }, html }: Post) =>
+        template._default({
             title: `${title} | Manybugs Blog`,
-            body: html,
-        });
-    },
+            body: t.div(
+                t.header(
+                    { class: "mv" },
+                    t.h1(title),
+                    t.p(t.time(publish_date.slice(0, 10))),
+                ),
+                t.main(raw(html)),
+            ),
+        }),
 };
 
 const response = {
@@ -104,7 +137,6 @@ const router =
             const handler = route[pathname];
             const pattern = new URLPattern({ pathname });
             const match = pattern.exec(req.url);
-            console.log(match);
             if (match) {
                 return await handler(match.pathname.groups, req);
             }
