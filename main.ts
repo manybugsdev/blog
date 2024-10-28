@@ -55,7 +55,7 @@ const template = {
                 t.link({
                     rel: "stylesheet",
                     href:
-                        "https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css",
+                        "https://unpkg.com/prismjs@1.29.0/themes/prism.min.css",
                 }),
                 t.link({ rel: "icon", href: "/favicon.ico" }),
                 t.link({ rel: "stylesheet", href: "/style.css" }),
@@ -64,7 +64,10 @@ const template = {
                 body,
                 t.footer(t.p(t.a({ href: "/" }, "Home"))),
                 t.script({
-                    src: "https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js",
+                    src: "https://unpkg.com/prismjs@1.29.0/prism.js",
+                }),
+                t.script({
+                    src: "https://unpkg.com/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js",
                 }),
             ),
         );
