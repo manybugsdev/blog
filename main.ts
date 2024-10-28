@@ -8,6 +8,8 @@ import remarkRehype from "npm:remark-rehype";
 import { matter } from "npm:vfile-matter";
 import { unified } from "npm:unified";
 
+const GA = Deno.env.get("GA");
+
 const t = van.tags;
 
 const elementProto = Object.getPrototypeOf(t.a()); // hack
@@ -46,6 +48,16 @@ const template = {
         return van.html(
             { lang: "en" },
             t.head(
+                GA &&
+                    t.script({
+                        async: true,
+                        src: `https://www.googletagmanager.com/gtag/js?id=${GA}`,
+                    }),
+                GA && t.script(`window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '${GA}');`),
                 t.meta({ charset: "utf8" }),
                 t.meta({
                     name: "viewport",
