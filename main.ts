@@ -8,27 +8,6 @@ import remarkRehype from "npm:remark-rehype";
 import { matter } from "npm:vfile-matter";
 import { unified } from "npm:unified";
 
-const GA = Deno.env.get("GA");
-
-const t = van.tags;
-
-const elementProto = Object.getPrototypeOf(t.a()); // hack
-
-function raw(html: string): Element { // hack
-    const el = {
-        __proto__: elementProto,
-        renderToBuf(buf: string[]) {
-            buf.push(html);
-        },
-        render() {
-            const buf: string[] = [];
-            this.renderToBuf(buf);
-            return buf.join("");
-        },
-    };
-    return el;
-}
-
 type Handler = (req: Request) => Response | Promise<Response>;
 
 type RouterHandler = (
@@ -43,21 +22,45 @@ type Post = {
     headers: Record<string, string>;
 };
 
+const GA = Deno.env.get("GA");
+
+const t = van.tags;
+
 const template = {
+    _raw: (html: string) => {
+        /**
+         * hack vanjs
+         */
+        const el = {
+            __proto__: Object.getPrototypeOf(t.a()),
+            renderToBuf(buf: string[]) {
+                buf.push(html);
+            },
+            render() {
+                const buf: string[] = [];
+                this.renderToBuf(buf);
+                return buf.join("");
+            },
+        };
+        return el;
+    },
+    _ga: (GA: string) => [
+        t.script({
+            async: true,
+            src: `https://www.googletagmanager.com/gtag/js?id=${GA}`,
+        }),
+        t.script(`
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '${GA}');
+    `),
+    ],
     _default: ({ title, body }: { title: string; body: Element }) => {
         return van.html(
             { lang: "en" },
             t.head(
-                GA &&
-                    t.script({
-                        async: true,
-                        src: `https://www.googletagmanager.com/gtag/js?id=${GA}`,
-                    }),
-                GA && t.script(`window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', '${GA}');`),
+                GA && template._ga(GA),
                 t.meta({ charset: "utf8" }),
                 t.meta({
                     name: "viewport",
@@ -124,7 +127,7 @@ const template = {
                     t.h1(title),
                     t.p(t.time(publish_date.slice(0, 10))),
                 ),
-                t.main(raw(html)),
+                t.main(template._raw(html)),
             ),
         }),
 };
@@ -186,7 +189,7 @@ const collectPosts = async (path: string) => {
                 id: `${path}/${basename}`,
                 md,
                 html,
-                headers: file.data.matter as any,
+                headers: file.data.matter as Record<string, string>,
             });
         }
     }
