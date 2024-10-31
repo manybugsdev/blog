@@ -1,6 +1,6 @@
 ---
 title: Reviewing the book Science Fiction by Stuart Ritchie
-publish_date: 2024-10-30T14:18:36.568Z
+publish_date: 2024-10-31
 ---
 
 I have read the book Science Fiction by Stuart Ritchie (Japanese translation). I found it interesting and moving. I would like everyone interested in science to read this book.
