@@ -79,3 +79,8 @@ code[class*="language-"],
 pre[class*="language-"] {
   font-size: small;
 }
+hr {
+  width: 100%;
+  border: none;
+  border-bottom: var(--black) 2px dotted;
+}
