@@ -208,10 +208,14 @@ if (import.meta.main) {
                     response.html(
                         template.home(posts),
                     ),
-                "/posts/:path*": ({ path }) => {
+                "/posts/:path*": ({ path }, req) => {
                     if (!path) return response.notFound();
                     const post = posts.find((p) => p.id === `posts/${path}`);
-                    if (!post) return response.notFound();
+                    if (!post) {
+                        return serveDir(req, {
+                            fsRoot: ".",
+                        });
+                    }
                     return response.html(
                         template.post(post),
                     );
