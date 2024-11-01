@@ -9,8 +9,10 @@ body {
   font-family: "Roboto", sans-serif;
   background-color: var(--white);
   color: var(--black);
+  padding: 0 0.8rem;
 }
 header.mv {
+  text-align: center;
   position: relative;
   display: flex;
   flex-flow: column;
@@ -46,9 +48,10 @@ a {
 main {
   margin: auto;
   width: min(var(--container-size), 100%);
-  padding: 1.2rem 0.4rem;
+  padding: 1.2rem 0;
   display: flex;
   flex-flow: column;
+  text-align: justify;
 }
 article {
   position: relative;
@@ -57,6 +60,7 @@ article {
   min-height: 12rem;
   overflow: hidden;
   margin: 1.2rem 0;
+  text-align: left;
 }
 article::before {
   position: absolute;

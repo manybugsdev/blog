@@ -95,12 +95,21 @@ gtag('config', '${GA}');
                     { class: "mv" },
                     t.div(
                         { style: "width: 72px; height: 72px" },
-                        t.img({
-                            src: "logo.svg",
-                            alt: "logo",
-                            width: "72px",
-                            height: "72px",
-                        }),
+                        template._raw(`
+<svg xmlns="http://www.w3.org/2000/svg" width="72px" height="72px" viewBox="0,0,128,128">
+    <g stroke="#111" stroke-width="6" fill="none" stroke-linecap="round">
+        <path d="M48,28a16,16,0,0,0,32,0"></path>
+        <path d="M26,68a72,32,0,0,1,74,0"></path>
+        <path d="M28,78a48,32,0,0,1,70,0"></path>
+        <path d="M40,96a48,64,0,0,1,48,0"></path>
+        <circle cx="64" cy="64" r="32" fill="white"></circle>
+        <path d="M46,68a12,2,0,0,0,24,0"></path>
+    </g>
+    <g fill="#111">
+        <circle cx="48" cy="52" r="3" />
+        <circle cx="70" cy="52" r="3" />
+    </g>
+</svg>`),
                     ),
                     t.h1("Manybugs Blog"),
                     t.p("Too many bugs, what should I do?"),
