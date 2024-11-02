@@ -66,23 +66,25 @@ gtag('config', '${GA}');
                     name: "viewport",
                     content: "width=device-width, initial-scale=1.0",
                 }),
+                t.meta({
+                    name: "description",
+                    content:
+                        "I'm a web front-end developer, Manybugs. This is my blog site. I'm interested in programming and science.",
+                }),
                 t.title(title),
                 t.link({
                     rel: "stylesheet",
-                    href:
-                        "https://unpkg.com/prismjs@1.29.0/themes/prism.min.css",
+                    href: "/prism.css",
                 }),
                 t.link({ rel: "icon", href: "/favicon.ico" }),
+                t.link({ rel: "stylesheet", href: "/modern-normalize.css" }),
                 t.link({ rel: "stylesheet", href: "/style.css" }),
             ),
             t.body(
                 body,
                 t.footer(t.p(t.a({ href: "/" }, "Home"))),
                 t.script({
-                    src: "https://unpkg.com/prismjs@1.29.0/prism.js",
-                }),
-                t.script({
-                    src: "https://unpkg.com/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js",
+                    src: "/prism.js",
                 }),
             ),
         );
@@ -121,7 +123,10 @@ gtag('config', '${GA}');
                     t.h1("Manybugs Blog"),
                     t.p("Too many bugs, what should I do?"),
                     t.p(t.a(
-                        { href: "https://github.com/manybugsdev" },
+                        {
+                            href: "https://github.com/manybugsdev",
+                            "aria-label": "My GitHub Account",
+                        },
                         template._github(),
                     )),
                 ),
@@ -152,12 +157,19 @@ gtag('config', '${GA}');
         }),
 };
 
+const staticHeaders: Record<string, string> = {
+    "cache-control": `max-age=${60 * 60 * 24 * 120}`,
+};
+
 const response = {
     notFound: () => new Response("404 not found.", { status: 404 }),
     html: (body: string) =>
         new Response(body, {
             status: 200,
-            headers: { "content-type": "text/html;charset=utf8" },
+            headers: {
+                "content-type": "text/html;charset=utf8",
+                ...staticHeaders,
+            },
         }),
 };
 
@@ -234,6 +246,9 @@ if (import.meta.main) {
                     if (!post) {
                         return serveDir(req, {
                             fsRoot: ".",
+                            headers: Object.keys(staticHeaders).map((key) =>
+                                `${key}:${staticHeaders[key]}`
+                            ),
                         });
                     }
                     return response.html(
@@ -241,7 +256,13 @@ if (import.meta.main) {
                     );
                 },
             }),
-            (req) => serveDir(req, { fsRoot: "./static" }),
+            (req) =>
+                serveDir(req, {
+                    fsRoot: "./static",
+                    headers: Object.keys(staticHeaders).map((key) =>
+                        `${key}:${staticHeaders[key]}`
+                    ),
+                }),
         ),
     );
 }
