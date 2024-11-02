@@ -3,6 +3,7 @@
 :root {
   --black: #111;
   --white: snow;
+  --gray: #999;
   --container-size: 600px;
 }
 body {
@@ -44,6 +45,9 @@ footer::after {
 }
 a {
   color: var(--black);
+}
+a:hover {
+  color: var(--gray);
 }
 main {
   margin: auto;
