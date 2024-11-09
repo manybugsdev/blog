@@ -7,6 +7,7 @@ import remarkParse from "npm:remark-parse";
 import remarkRehype from "npm:remark-rehype";
 import { matter } from "npm:vfile-matter";
 import { unified } from "npm:unified";
+import { render, tags as x } from "./xml.ts";
 
 type Handler = (req: Request) => Response | Promise<Response>;
 
@@ -200,24 +201,24 @@ const response = {
         }),
     atom: (feed: Feed) =>
         new Response(
-            `<?xml version="1.0" encoding="utf-8"?>\n` +
-                t.feed(
+            render(
+                x.feed(
                     { xmlns: "http://www.w3.org/2005/Atom" },
-                    // @ts-ignore
-                    t.author(t.name(feed.author)),
-                    t.id(feed.id),
-                    t.link({ rel: "self", href: feed.id }),
-                    t.title(feed.title),
-                    t.updated(feed.updated.toISOString()),
+                    x.author(x.name(feed.author)),
+                    x.id(feed.id),
+                    x.link({ rel: "self", href: feed.id }),
+                    x.title(feed.title),
+                    x.updated(feed.updated.toISOString()),
                     feed.entries.map((ent) =>
-                        t.entry(
-                            t.id(ent.id),
-                            t.link({ ref: "alternate", href: ent.id }),
-                            t.title(ent.title),
-                            t.updated(ent.updated.toISOString()),
+                        x.entry(
+                            x.id(ent.id),
+                            x.link({ ref: "alternate", href: ent.id }),
+                            x.title(ent.title),
+                            x.updated(ent.updated.toISOString()),
                         )
                     ),
-                ).render(),
+                ),
+            ),
             {
                 status: 200,
                 headers: {
